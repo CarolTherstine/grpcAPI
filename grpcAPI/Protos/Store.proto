@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option csharp_namespace = "grpcAPI.Protos";
+
+service StoreProto {
+	rpc Create (Item) returns (StatusEmptyResponse);
+	rpc Update (Item) returns (StatusEmptyResponse);
+	rpc Delete (Request) returns (StatusEmptyResponse);
+	rpc GetItem (Request) returns (Item);
+	rpc GetItemList (RequestList) returns (ItemList);
+}
+
+message StatusEmptyResponse{
+    string Code = 1;
+    string Message =2;
+}
+
+message RequestList {
+	string SectionKey = 1;
+}
+
+message Request {
+    string Id = 1;
+	string SectionKey = 2;
+}
+
+message Item {
+	string Id = 1;
+	string Name = 2;
+	string SectionKey = 3;
+}
+
+message ItemList {
+	string Code  = 1;
+    string Message = 2;
+	//Assumes key is ID and value is NAME
+    map<string,string> List = 3;
+	string SectionKey = 4;
+}
+
+
+
